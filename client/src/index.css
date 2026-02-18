@@ -115,6 +115,13 @@ body {
   color: #fff;
 }
 
+.size-error {
+  margin: 0.65rem 0 0;
+  color: #c62828;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
 .add-to-cart-button {
   margin-top: 1.25rem;
   border: 0;

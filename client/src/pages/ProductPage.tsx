@@ -22,6 +22,26 @@ const product: Product = {
 
 function ProductPage() {
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined)
+  const [sizeError, setSizeError] = useState('')
+
+  const handleSizeSelect = (size: string) => {
+    setSelectedSize(size)
+    if (sizeError) {
+      setSizeError('')
+    }
+  }
+
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      setSizeError('Please select a size.')
+      return
+    }
+
+    console.log({
+      productId: product.id,
+      size: selectedSize,
+    })
+  }
 
   return (
     <main className="page">
@@ -40,23 +60,24 @@ function ProductPage() {
           <p className="product-description">{product.description}</p>
 
           <div className="size-section">
-            <span className="size-label">SIZE: {selectedSize}</span>
+            <span className="size-label">SIZE: {selectedSize ?? '-'}</span>
             <div className="size-row">
               {product.sizeOptions.map((size) => (
                 <button
                   key={size}
                   type="button"
                   className={`size-button ${selectedSize === size ? 'is-selected' : ''}`}
-                  onClick={() => setSelectedSize(size)}
+                  onClick={() => handleSizeSelect(size)}
                   aria-pressed={selectedSize === size}
                 >
                   {size}
                 </button>
               ))}
             </div>
+            {sizeError ? <p className="size-error">{sizeError}</p> : null}
           </div>
 
-          <button type="button" className="add-to-cart-button">
+          <button type="button" className="add-to-cart-button" onClick={handleAddToCart}>
             Add to Cart
           </button>
         </div>
