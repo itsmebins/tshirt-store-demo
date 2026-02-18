@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+import { useCart } from '../cart/CartProvider'
+
 type Product = {
   id: number
   title: string
@@ -23,6 +25,7 @@ const product: Product = {
 function ProductPage() {
   const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined)
   const [sizeError, setSizeError] = useState('')
+  const { addItem } = useCart()
 
   const handleSizeSelect = (size: string) => {
     setSelectedSize(size)
@@ -37,10 +40,7 @@ function ProductPage() {
       return
     }
 
-    console.log({
-      productId: product.id,
-      size: selectedSize,
-    })
+    addItem(product, selectedSize)
   }
 
   return (
