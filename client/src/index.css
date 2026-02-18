@@ -109,6 +109,12 @@ body {
   border-color: #a8a8a8;
 }
 
+.size-button.is-selected {
+  border-color: #111;
+  background-color: #111;
+  color: #fff;
+}
+
 .add-to-cart-button {
   margin-top: 1.25rem;
   border: 0;

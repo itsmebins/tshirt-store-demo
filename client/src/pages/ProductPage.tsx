@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 type Product = {
   id: number
   title: string
@@ -19,6 +21,8 @@ const product: Product = {
 }
 
 function ProductPage() {
+  const [selectedSize, setSelectedSize] = useState<string | undefined>(undefined)
+
   return (
     <main className="page">
       <header className="top-bar">
@@ -36,10 +40,16 @@ function ProductPage() {
           <p className="product-description">{product.description}</p>
 
           <div className="size-section">
-            <span className="size-label">Size</span>
+            <span className="size-label">SIZE: {selectedSize}</span>
             <div className="size-row">
               {product.sizeOptions.map((size) => (
-                <button key={size} type="button" className="size-button">
+                <button
+                  key={size}
+                  type="button"
+                  className={`size-button ${selectedSize === size ? 'is-selected' : ''}`}
+                  onClick={() => setSelectedSize(size)}
+                  aria-pressed={selectedSize === size}
+                >
                   {size}
                 </button>
               ))}
