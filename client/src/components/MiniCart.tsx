@@ -39,25 +39,32 @@ function MiniCart() {
         onClick={() => setIsOpen((open) => !open)}
         aria-expanded={isOpen}
         aria-label={`My Cart (${totalQuantity})`}
+        data-testid="mini-cart-toggle"
       >
         My Cart ({totalQuantity})
       </button>
 
       {isOpen ? (
-        <div className="mini-cart-panel">
+        <div className="mini-cart-panel" data-testid="mini-cart-panel">
           {items.length === 0 ? (
             <p className="mini-cart-empty">Your cart is empty.</p>
           ) : (
             <ul className="mini-cart-list">
               {items.map((item) => (
-                <li key={`${item.productId}-${item.sizeLabel}`} className="mini-cart-row">
+                <li
+                  key={`${item.productId}-${item.sizeLabel}`}
+                  className="mini-cart-row"
+                  data-testid="cart-row"
+                >
                   <img src={item.imageURL} alt={item.title} className="mini-cart-thumb" />
                   <div className="mini-cart-details">
                     <p className="mini-cart-title">{item.title}</p>
-                    <p className="mini-cart-meta">
+                    <p className="mini-cart-meta" data-testid="cart-row-qty">
                       {item.quantity}x ${item.price.toFixed(2)}
                     </p>
-                    <p className="mini-cart-meta">Size: {item.sizeLabel}</p>
+                    <p className="mini-cart-meta" data-testid={`cart-row-size-${item.sizeLabel}`}>
+                      Size: {item.sizeLabel}
+                    </p>
                   </div>
                 </li>
               ))}

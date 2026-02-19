@@ -89,7 +89,7 @@ function ProductPage() {
 
             <div className="size-section">
               <span className="size-label">SIZE: {selectedSize ?? '-'}</span>
-              <div className="size-row">
+              <div className="size-row" data-testid="size-options">
                 {product.sizeOptions.map((size) => (
                   <button
                     key={size}
@@ -97,15 +97,25 @@ function ProductPage() {
                     className={`size-button ${selectedSize === size ? 'is-selected' : ''}`}
                     onClick={() => handleSizeSelect(size)}
                     aria-pressed={selectedSize === size}
+                    data-testid={`size-option-${size}`}
                   >
                     {size}
                   </button>
                 ))}
               </div>
-              {sizeError ? <p className="size-error">{sizeError}</p> : null}
+              {sizeError ? (
+                <p className="size-error" data-testid="size-error">
+                  {sizeError}
+                </p>
+              ) : null}
             </div>
 
-            <button type="button" className="add-to-cart-button" onClick={handleAddToCart}>
+            <button
+              type="button"
+              className="add-to-cart-button"
+              onClick={handleAddToCart}
+              data-testid="add-to-cart"
+            >
               Add to Cart
             </button>
           </div>
