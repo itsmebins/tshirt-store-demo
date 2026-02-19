@@ -17,8 +17,8 @@ describe('fetchProduct', () => {
         title: 'Classic Tee',
         description: 'desc',
         price: 75,
-        imageURL: '/images/classic-tee.png',
-        sizeOptions: [{ label: 'S' }, { long: 'Medium' }, { value: 'XL' }, { id: 42 }],
+        imageURL: '/images/classic-tee.jpg',
+        sizeOptions: [{ label: 'S' }, { long: 'M' }, { value: 'XL' }, { id: 42 }],
       }),
     } as Response)
 
@@ -29,7 +29,7 @@ describe('fetchProduct', () => {
     expect(fetchMock).toHaveBeenCalledTimes(1)
     const calledUrl = fetchMock.mock.calls[0]?.[0]
     expect(String(calledUrl)).toMatch(/\/product\/1$/)
-    expect(product.sizeOptions).toEqual(['S', 'Medium', 'XL', '42'])
+    expect(product.sizeOptions).toEqual(['S', 'M', 'XL', '42'])
   })
 
   it('throws on non-ok responses', async () => {

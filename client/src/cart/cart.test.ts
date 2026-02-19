@@ -11,7 +11,7 @@ describe('cart domain logic', () => {
       productId: 1,
       title: 'Classic Tee',
       price: 75,
-      imageURL: '/images/classic-tee.png',
+      imageURL: '/images/classic-tee.jpg',
       sizeLabel: 'M',
     }
 
@@ -29,7 +29,7 @@ describe('cart domain logic', () => {
       productId: 1,
       title: 'Classic Tee',
       price: 75,
-      imageURL: '/images/classic-tee.png',
+      imageURL: '/images/classic-tee.jpg',
       sizeLabel: 'M',
     }
 
@@ -51,7 +51,7 @@ describe('cart domain logic', () => {
           productId: 1,
           title: 'Classic Tee',
           price: 75,
-          imageURL: '/images/classic-tee.png',
+          imageURL: '/images/classic-tee.jpg',
           sizeLabel: 'S',
           quantity: 2,
         },
@@ -59,7 +59,7 @@ describe('cart domain logic', () => {
           productId: 1,
           title: 'Classic Tee',
           price: 75,
-          imageURL: '/images/classic-tee.png',
+          imageURL: '/images/classic-tee.jpg',
           sizeLabel: 'M',
           quantity: 3,
         },

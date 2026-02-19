@@ -1,13 +1,38 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 import { useCart } from '../cart/CartProvider'
 
 function MiniCart() {
   const [isOpen, setIsOpen] = useState(false)
   const { items, totalQuantity } = useCart()
+  const containerRef = useRef<HTMLDivElement | null>(null)
+
+  useEffect(() => {
+    if (!isOpen) {
+      return
+    }
+
+    const handleDocumentClick = (event: MouseEvent) => {
+      const target = event.target as Node | null
+      if (!target) {
+        return
+      }
+
+      if (containerRef.current?.contains(target)) {
+        return
+      }
+
+      setIsOpen(false)
+    }
+
+    document.addEventListener('mousedown', handleDocumentClick)
+    return () => {
+      document.removeEventListener('mousedown', handleDocumentClick)
+    }
+  }, [isOpen])
 
   return (
-    <div className="mini-cart">
+    <div className="mini-cart" ref={containerRef}>
       <button
         type="button"
         className="cart-pill"
