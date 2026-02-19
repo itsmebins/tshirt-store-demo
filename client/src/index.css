@@ -1,3 +1,25 @@
+:root {
+  --color-text-primary: #151515;
+  --color-text-secondary: #4f4f4f;
+  --color-text-muted: #6b7280;
+  --color-bg-page: #f7f7f7;
+  --color-bg-surface: #fff;
+  --color-primary: #111;
+  --color-primary-hover: #2c2c2c;
+  --color-label: #6b7280;
+  --color-required: #dc2626;
+  --color-error: #c62828;
+  --color-error-strong: #b42318;
+  --color-border-subtle: #d9d9d9;
+  --color-border-soft: #e7e7e7;
+  --color-border-lighter: #f0f0f0;
+  --color-border-input: #cfcfcf;
+  --color-border-input-hover: #a8a8a8;
+  --color-border-button: #cbcbcb;
+  --color-border-button-hover: #999;
+  --shadow-dropdown: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6,8 +28,8 @@ body {
   margin: 0;
   min-width: 320px;
   font-family: 'Helvetica Neue', Arial, sans-serif;
-  color: #151515;
-  background-color: #f7f7f7;
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-page);
 }
 
 #root {
@@ -37,9 +59,9 @@ body {
   padding: 0.5rem 0.9rem;
   font-size: 0.9rem;
   font-weight: 600;
-  border: 1px solid #d9d9d9;
+  border: 1px solid var(--color-border-subtle);
   border-radius: 999px;
-  background-color: #fff;
+  background-color: var(--color-bg-surface);
   cursor: pointer;
 }
 
@@ -50,17 +72,17 @@ body {
   width: min(320px, calc(100vw - 2rem));
   max-height: 360px;
   overflow-y: auto;
-  background-color: #fff;
-  border: 1px solid #e7e7e7;
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-soft);
   border-radius: 12px;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: var(--shadow-dropdown);
   padding: 0.7rem;
   z-index: 20;
 }
 
 .mini-cart-empty {
   margin: 0.4rem;
-  color: #555;
+  color: var(--color-text-secondary);
 }
 
 .mini-cart-list {
@@ -78,7 +100,7 @@ body {
 }
 
 .mini-cart-row + .mini-cart-row {
-  border-top: 1px solid #f0f0f0;
+  border-top: 1px solid var(--color-border-lighter);
 }
 
 .mini-cart-thumb {
@@ -103,7 +125,7 @@ body {
 }
 
 .mini-cart-meta {
-  color: #4f4f4f;
+  color: var(--color-text-secondary);
   font-size: 0.92rem;
 }
 
@@ -112,7 +134,7 @@ body {
   grid-template-columns: minmax(280px, 420px) minmax(320px, 1fr);
   gap: 2rem;
   align-items: start;
-  background-color: #fff;
+  background-color: var(--color-bg-surface);
   border-radius: 14px;
   padding: 1.5rem;
   max-width: 940px;
@@ -120,7 +142,7 @@ body {
 }
 
 .status-panel {
-  background-color: #fff;
+  background-color: var(--color-bg-surface);
   border-radius: 14px;
   padding: 1.5rem;
   max-width: 940px;
@@ -132,21 +154,21 @@ body {
 }
 
 .status-message-error {
-  color: #b42318;
+  color: var(--color-error-strong);
 }
 
 .retry-button {
   margin-top: 0.9rem;
-  border: 1px solid #cbcbcb;
+  border: 1px solid var(--color-border-button);
   border-radius: 8px;
   padding: 0.55rem 0.95rem;
-  background-color: #fff;
+  background-color: var(--color-bg-surface);
   cursor: pointer;
   font-weight: 600;
 }
 
 .retry-button:hover {
-  border-color: #999;
+  border-color: var(--color-border-button-hover);
 }
 
 .image-panel {
@@ -185,7 +207,7 @@ body {
 .product-description {
   margin: 0;
   line-height: 1.6;
-  color: #444;
+  color: var(--color-text-muted);
 }
 
 .size-section {
@@ -195,7 +217,18 @@ body {
 .size-label {
   display: inline-block;
   margin-bottom: 0.5rem;
-  font-weight: 600;
+  font-weight: 500;
+  color: var(--color-label);
+}
+
+.size-required {
+  color: var(--color-required);
+  font-weight: 700;
+}
+
+.size-label-value {
+  color: var(--color-text-primary);
+  font-weight: 700;
 }
 
 .size-row {
@@ -206,26 +239,26 @@ body {
 .size-button {
   width: 42px;
   height: 40px;
-  border: 1px solid #cfcfcf;
+  border: 1px solid var(--color-border-input);
   border-radius: 8px;
-  background-color: #fff;
+  background-color: var(--color-bg-surface);
   cursor: pointer;
   font-weight: 600;
 }
 
 .size-button:hover {
-  border-color: #a8a8a8;
+  border-color: var(--color-border-input-hover);
 }
 
 .size-button.is-selected {
-  border-color: #111;
-  background-color: #111;
-  color: #fff;
+  border-color: var(--color-primary);
+  background-color: var(--color-primary);
+  color: var(--color-bg-surface);
 }
 
 .size-error {
   margin: 0.65rem 0 0;
-  color: #c62828;
+  color: var(--color-error);
   font-size: 0.92rem;
   font-weight: 600;
 }
@@ -235,15 +268,15 @@ body {
   border: 0;
   border-radius: 10px;
   padding: 0.9rem 1.25rem;
-  background-color: #111;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-bg-surface);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
 }
 
 .add-to-cart-button:hover {
-  background-color: #2c2c2c;
+  background-color: var(--color-primary-hover);
 }
 
 @media (max-width: 840px) {

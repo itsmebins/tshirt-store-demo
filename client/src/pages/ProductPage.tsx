@@ -88,7 +88,10 @@ function ProductPage() {
             <p className="product-description">{product.description}</p>
 
             <div className="size-section">
-              <span className="size-label">SIZE: {selectedSize ?? '-'}</span>
+              <span className="size-label">
+                SIZE <span className="size-required">*</span>
+                {selectedSize ? <span className="size-label-value"> {selectedSize}</span> : null}
+              </span>
               <div className="size-row" data-testid="size-options">
                 {product.sizeOptions.map((size) => (
                   <button
