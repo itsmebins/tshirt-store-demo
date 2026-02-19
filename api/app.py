@@ -9,10 +9,10 @@ PRODUCTS = {
         'title': 'Classic Tee',
         'description': 'A clean, everyday t-shirt made from soft cotton with a relaxed fit for all-day comfort.',
         'price': 75.00,
-        'imageURL': '/images/classic-tee.png',
+        'imageURL': '/images/classic-tee.jpg',
         'sizeOptions': [
             {'label': 'S'},
-            {'long': 'Medium'},
+            {'long': 'M'},
             {'label': 'L'},
         ],
     }
@@ -21,8 +21,10 @@ PRODUCTS = {
 
 def create_app():
     app = Flask(__name__)
-    client_origin = os.environ.get('CLIENT_ORIGIN', 'http://localhost:5173')
-    CORS(app, resources={r"/*": {"origins": [client_origin]}})
+    configured_origins = os.environ.get('CLIENT_ORIGIN', '')
+    allowed_origins = {'http://localhost:5173', 'http://localhost:5174'}
+    allowed_origins.update(origin.strip() for origin in configured_origins.split(',') if origin.strip())
+    CORS(app, resources={r"/*": {"origins": sorted(allowed_origins)}})
 
     @app.get('/health')
     def health():

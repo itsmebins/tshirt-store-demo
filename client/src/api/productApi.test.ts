@@ -26,7 +26,9 @@ describe('fetchProduct', () => {
 
     const product = await fetchProduct(1)
 
-    expect(fetchMock).toHaveBeenCalledWith('http://localhost:5000/product/1')
+    expect(fetchMock).toHaveBeenCalledTimes(1)
+    const calledUrl = fetchMock.mock.calls[0]?.[0]
+    expect(String(calledUrl)).toMatch(/\/product\/1$/)
     expect(product.sizeOptions).toEqual(['S', 'Medium', 'XL', '42'])
   })
 

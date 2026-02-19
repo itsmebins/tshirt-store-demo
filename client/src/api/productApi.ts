@@ -7,13 +7,20 @@ export type Product = {
   sizeOptions: string[]
 }
 
-type ProductApiResponse = {
-  id: unknown
-  title: unknown
-  description: unknown
-  price: unknown
-  imageURL: unknown
-  sizeOptions: unknown
+export type ProductApiSizeOption = {
+  label?: string
+  long?: string
+  value?: string
+  id?: string | number
+}
+
+export type ProductApiResponse = {
+  id: number
+  title: string
+  description: string
+  price: number
+  imageURL: string
+  sizeOptions: ProductApiSizeOption[]
 }
 
 const DEFAULT_API_BASE_URL = 'http://localhost:5000'
@@ -24,20 +31,44 @@ function getApiBaseUrl(): string {
   return baseUrl.replace(/\/+$/, '')
 }
 
-function asRecord(value: unknown): Record<string, unknown> | null {
-  if (!value || typeof value !== 'object' || Array.isArray(value)) {
-    return null
-  }
-
-  return value as Record<string, unknown>
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return !!value && typeof value === 'object' && !Array.isArray(value)
 }
 
-function normalizeSizeLabel(option: unknown): string {
-  if (!option || typeof option !== 'object' || Array.isArray(option)) {
-    return String(option)
+function isOptionalString(value: unknown): value is string | undefined {
+  return value === undefined || typeof value === 'string'
+}
+
+function isSizeOption(value: unknown): value is ProductApiSizeOption {
+  if (!isRecord(value)) {
+    return false
   }
 
-  const sizeOption = option as Record<string, unknown>
+  return (
+    isOptionalString(value.label) &&
+    isOptionalString(value.long) &&
+    isOptionalString(value.value) &&
+    (value.id === undefined || typeof value.id === 'string' || typeof value.id === 'number')
+  )
+}
+
+function isProductApiResponse(payload: unknown): payload is ProductApiResponse {
+  if (!isRecord(payload)) {
+    return false
+  }
+
+  return (
+    typeof payload.id === 'number' &&
+    typeof payload.title === 'string' &&
+    typeof payload.description === 'string' &&
+    typeof payload.price === 'number' &&
+    typeof payload.imageURL === 'string' &&
+    Array.isArray(payload.sizeOptions) &&
+    payload.sizeOptions.every(isSizeOption)
+  )
+}
+
+function normalizeSizeLabel(sizeOption: ProductApiSizeOption): string {
   const sizeLabel =
     sizeOption.label ?? sizeOption.long ?? sizeOption.value ?? String(sizeOption.id)
 
@@ -45,30 +76,17 @@ function normalizeSizeLabel(option: unknown): string {
 }
 
 function parseProduct(payload: unknown): Product {
-  const parsed = asRecord(payload) as ProductApiResponse | null
-
-  if (!parsed) {
-    throw new Error('Invalid product payload')
-  }
-
-  if (
-    typeof parsed.id !== 'number' ||
-    typeof parsed.title !== 'string' ||
-    typeof parsed.description !== 'string' ||
-    typeof parsed.price !== 'number' ||
-    typeof parsed.imageURL !== 'string' ||
-    !Array.isArray(parsed.sizeOptions)
-  ) {
+  if (!isProductApiResponse(payload)) {
     throw new Error('Invalid product payload')
   }
 
   return {
-    id: parsed.id,
-    title: parsed.title,
-    description: parsed.description,
-    price: parsed.price,
-    imageURL: parsed.imageURL,
-    sizeOptions: parsed.sizeOptions.map((option) => normalizeSizeLabel(option)),
+    id: payload.id,
+    title: payload.title,
+    description: payload.description,
+    price: payload.price,
+    imageURL: payload.imageURL,
+    sizeOptions: payload.sizeOptions.map((option) => normalizeSizeLabel(option)),
   }
 }
 
