@@ -1,3 +1,5 @@
+import os
+
 from flask import Flask, jsonify
 from flask_cors import CORS
 
@@ -19,7 +21,8 @@ PRODUCTS = {
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, resources={r"/*": {"origins": ["http://localhost:5173"]}})
+    client_origin = os.environ.get('CLIENT_ORIGIN', 'http://localhost:5173')
+    CORS(app, resources={r"/*": {"origins": [client_origin]}})
 
     @app.get('/health')
     def health():
