@@ -34,3 +34,12 @@ Flask API for the tshirt-store demo.
   ```json
   {"status":"ok"}
   ```
+- `GET /product/1` returns product JSON.
+
+## Test
+
+Run API tests with:
+
+```bash
+pytest
+```
