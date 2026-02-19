@@ -1,6 +1,7 @@
 import { useState } from 'react'
 
 import { useCart } from '../cart/CartProvider'
+import MiniCart from '../components/MiniCart'
 
 type Product = {
   id: number
@@ -46,7 +47,7 @@ function ProductPage() {
   return (
     <main className="page">
       <header className="top-bar">
-        <div className="cart-pill">My Cart (0)</div>
+        <MiniCart />
       </header>
 
       <section className="product-layout">
