@@ -117,6 +117,34 @@ body {
   padding: 1.5rem;
 }
 
+.status-panel {
+  background-color: #fff;
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.status-message {
+  margin: 0;
+}
+
+.status-message-error {
+  color: #b42318;
+}
+
+.retry-button {
+  margin-top: 0.9rem;
+  border: 1px solid #cbcbcb;
+  border-radius: 8px;
+  padding: 0.55rem 0.95rem;
+  background-color: #fff;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.retry-button:hover {
+  border-color: #999;
+}
+
 .image-panel {
   width: 100%;
 }
